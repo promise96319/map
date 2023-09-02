@@ -40,7 +40,6 @@ function App() {
   const mapRef = useRef<any>()
   const idRef = useRef<number>(0)
   const markers = useRef<Record<number, any>>({})
-  const [style, setStyle] = useState('normal')
 
   const addMarker = (position: any) => {
     idRef.current += 1
@@ -62,7 +61,6 @@ function App() {
     if (!mapRef.current)
       return
     const position = mapRef.current.containerToLngLat(new window.AMap.Pixel(e.pageX, e.pageY))
-    console.log('position', position)
     addMarker(position)
   }
 

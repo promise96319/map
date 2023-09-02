@@ -58,15 +58,16 @@ html,body {
   font-size: 20px;
   border: 1px solid #999;
   border-radius: 4px;
-  z-index: 2;
+  z-index: 2; 
+  transition: all 0.3s;
 }
 
 @keyframes rotate {
   0% {
-    transform: rotate(0deg);
+    transform: rotateY(0deg);
   }
   100% {
-    transform: rotate(360deg);
+    transform: rotateY(360deg);
   }
 }
 

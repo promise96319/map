@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import markerImg from './assets/marker.jpg'
+import markerImg from './assets/marker.png'
 
 import './App.css'
 
@@ -79,18 +79,10 @@ function App() {
     mapRef.current = map
   }, [])
 
-  const handleSwitchMap = () => {
-    const newStyle = style === 'green' ? 'normal' : 'green'
-    const mapStyle = newStyle === 'green' ? 'amap://styles/7df9dff560cc1804ccdbc8295259615f' : ''
-    setStyle(newStyle)
-    mapRef.current.setMapStyle(mapStyle)
-  }
-
   return (
     <main >
       <div id="map-container" onDragOver={e => e.preventDefault() } onDrop={handleDrop}></div>
       <img className="original-marker" src={markerImg} draggable></img>
-      <button className='switch-map' onClick={handleSwitchMap}>切换</button>
     </main>
   )
 }

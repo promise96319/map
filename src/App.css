@@ -61,10 +61,21 @@ html,body {
   z-index: 2;
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
 .marker-img {
   z-index: 1;
   width: 64px;
   height: 64px;
   cursor: move;
+  animation: rotate 2s linear infinite; /* 可以根据需要更改动画持续时间和速度 */
 }
 

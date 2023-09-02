@@ -68,8 +68,14 @@ function App() {
 
   useEffect(() => {
     const map = new window.AMap.Map('map-container', {
-      center: [116.397428, 39.90923], // 中心点坐标
+      zoom: 4, // 设置地图缩放级别
+      center: [104.065735, 35.738621],
     })
+    // 设置地图的边界限制，只显示中国地图范围
+    const southWest = new AMap.LngLat(73.41877, 3.861642) // 中国范围的西南角坐标
+    const northEast = new AMap.LngLat(135.085769, 53.558204) // 中国范围的东北角坐标
+    const bounds = new AMap.Bounds(southWest, northEast)
+    map.setBounds(bounds)
     mapRef.current = map
   }, [])
 

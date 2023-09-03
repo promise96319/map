@@ -29,7 +29,7 @@ function Maker(props: any) {
     onContextMenu={props.onRemove}
   >
      <div className='marker-title'>
-       {isEdit ? <input placeholder='请输入生态标识名称' value={title} ref={inputRef} className='marker-input' onChange={e => setTitle(e.target.value)} onKeyUp={handleKeyUp} onBlur={() => setIsEdit(false)}></input> : title}
+       {isEdit ? <input placeholder='请输入生态环保法律名称' value={title} ref={inputRef} className='marker-input' onChange={e => setTitle(e.target.value)} onKeyUp={handleKeyUp} onBlur={() => setIsEdit(false)}></input> : title}
      </div>
       <img className='marker-img' src={markerImg}></img>
     </div>

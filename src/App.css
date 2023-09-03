@@ -60,6 +60,7 @@ html,body {
   border-radius: 4px;
   z-index: 2; 
   transition: all 0.3s;
+  width: 240px;
 }
 
 @keyframes rotate {

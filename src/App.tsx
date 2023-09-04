@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import markerImg from './assets/marker.png'
+import methodImg from './assets/method.png'
+import lawImg from './assets/law.png'
 
 import './App.css'
 
 const AMap = window.AMap
 
 function Maker(props: any) {
+  const { type } = props
+
   const [title, setTitle] = useState('')
   const inputRef = useRef<any>()
   const [isEdit, setIsEdit] = useState(true)
@@ -22,16 +25,16 @@ function Maker(props: any) {
   }
 
   return (
-  <div className="marker-container"
+  <div className={type === 'law' ? 'marker-container marker-container-law ' : 'marker-container marker-container-method'}
     onDoubleClick={() => {
       setIsEdit(true)
     }}
     onContextMenu={props.onRemove}
   >
      <div className='marker-title'>
-       {isEdit ? <input placeholder='请输入生态环保法律名称' value={title} ref={inputRef} className='marker-input' onChange={e => setTitle(e.target.value)} onKeyUp={handleKeyUp} onBlur={() => setIsEdit(false)}></input> : title}
+       {isEdit ? <input placeholder={type === 'law' ? '请输入生态环保法律名称' : '请输入我国生态环保举措'} value={title} ref={inputRef} className='marker-input' onChange={e => setTitle(e.target.value)} onKeyUp={handleKeyUp} onBlur={() => setIsEdit(false)}></input> : title}
      </div>
-      <img className='marker-img' src={markerImg}></img>
+      <img className='marker-img' src={type === 'law' ? lawImg : methodImg}></img>
     </div>
   )
 }
@@ -41,7 +44,7 @@ function App() {
   const idRef = useRef<number>(0)
   const markers = useRef<Record<number, any>>({})
 
-  const addMarker = (position: any) => {
+  const addMarker = (position: any, type: 'method' | 'law') => {
     idRef.current += 1
     const marker = new window.AMap.Marker({
       position,
@@ -54,14 +57,15 @@ function App() {
 
     const el = document.createElement('div')
     marker.setContent(el)
-    createRoot(el).render(<Maker onRemove={() => mapRef?.current.remove(marker)} id={idRef.current}></Maker>)
+    createRoot(el).render(<Maker onRemove={() => mapRef?.current.remove(marker)} id={idRef.current} type={type}></Maker>)
   }
 
   const handleDrop = (e: React.DragEvent) => {
+    const data = e.dataTransfer.getData('text/plain')
     if (!mapRef.current)
       return
     const position = mapRef.current.containerToLngLat(new window.AMap.Pixel(e.pageX, e.pageY))
-    addMarker(position)
+    addMarker(position, data as any)
   }
 
   useEffect(() => {
@@ -80,7 +84,8 @@ function App() {
   return (
     <main >
       <div id="map-container" onDragOver={e => e.preventDefault() } onDrop={handleDrop}></div>
-      <img className="original-marker" src={markerImg} draggable></img>
+      <img className="original-marker original-marker-law" src={lawImg} draggable onDragStart={e => e.dataTransfer.setData('text/plain', 'law')}></img>
+      <img className="original-marker original-marker-method" src={methodImg} draggable onDragStart={e => e.dataTransfer.setData('text/plain', 'method')}></img>
     </main>
   )
 }

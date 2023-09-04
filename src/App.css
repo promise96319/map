@@ -15,12 +15,20 @@ html,body {
 
 .original-marker {
   position: fixed;
-  left: 0;
-  bottom: 0;
+  bottom: 16px;
   z-index: 99999;
-  width: 100px;
+  /* width: 100px; */
   height: 100px;
   cursor: pointer;
+}
+
+
+.original-marker-law {
+  left: 16px;
+}
+
+.original-marker-method {
+  right: 16px;
 }
 
 .marker-container {
@@ -28,10 +36,8 @@ html,body {
   align-items: center;
   flex-direction: column;
   transform: translateX(-50%);
-  /* background-color: #fff; */
   border-radius: 8px;
   padding: 8px;
-  /* box-shadow: 0 4px 10px 0 rgba(0,0,0,.1); */
   z-index: 99999;
   cursor: move;
 }
@@ -44,11 +50,18 @@ html,body {
   font-weight: 600;
   z-index: 2;
   white-space: nowrap;
-  color: green;
   background-color: #fbf9f2;
   padding: 2px;
   /* 微软雅黑，其余的按照默认来 */
   font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.marker-container-method .marker-title {
+  color: green;
+}
+
+.marker-container-law .marker-title {
+  color: red;
 }
 
 .marker-title .marker-input {
@@ -75,7 +88,6 @@ html,body {
 
 .marker-img {
   z-index: 1;
-  width: 64px;
   height: 64px;
   cursor: move;
   animation: rotate 2s linear infinite; /* 可以根据需要更改动画持续时间和速度 */
